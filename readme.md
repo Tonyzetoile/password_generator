@@ -39,5 +39,5 @@ Download the ZIP folder on the GitHub web page. Extract the folder and run the o
 
 ## Author
 
-Created by Anthony Matra
+Created by Anthony Matra  
 A beginner developer in Python, HTML / CSS / JavaScript, LUAU, and more...
