@@ -8,6 +8,7 @@
 
 import pyperclip, secrets, string
 from colorama import Style, init
+
 # Pour Colorama, si autoreset souhaité, décommenter ça :
 # init(autoreset=True)
 
