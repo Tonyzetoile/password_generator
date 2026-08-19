@@ -1,7 +1,7 @@
 ############################################
-### Générateur de mot de passe en Python ###
+###      Random password generator       ###
 ###                                      ###
-###             Par Anthony              ###
+###              By Anthony              ###
 ###                                      ###
 ###                  V1                  ###
 ############################################
@@ -9,66 +9,66 @@
 import pyperclip, secrets, string
 from colorama import Style, init
 
-# Pour Colorama, si autoreset souhaité, décommenter ça :
+# For Colorama, if you want the autoreset:
 # init(autoreset=True)
 
-# Début du programme
-mot_de_passe = ""
+# Beginning of the program
+password = ""
 
-taille = -1 # Valeur initiale pour rentrer dans le while
-maj = -1
-min = -1
-car_spe = -1
+length = -1 # Initial value to enter the while loop
+upper = -1
+lower = -1
+spe_char = -1
 nb = -1
 
-def def_taille(taille=-1):
-    while type(taille) != int or not 5 <= taille <= 20:
-        taille = int(input(Style.BRIGHT + "Quelle taille / Combien de caractères ?" + Style.RESET_ALL + " (Entre 5 et 20)\n--> "))
-        return taille
+def def_length(length=-1):
+    while type(length) != int or not 5 <= length <= 20:
+        length = int(input(Style.BRIGHT + "What length / How many characters?" + Style.RESET_ALL + " (Between 5 and 20)\n--> "))
+        return length
 
 
-def def_maj(maj=-1):    
-    while type(maj) != bool:
-        maj = input(Style.BRIGHT + "Majuscules ?" + Style.RESET_ALL + " O/N\n--> ")
-        if maj.lower() in ["o", "oui", "ou", "yes", "y"]:
-            maj = True
-            return maj
-        elif maj.lower() in ["n", "non", "no", ""]:
-            maj = False
-            return maj
+def def_upper(upper=-1):    
+    while type(upper) != bool:
+        upper = input(Style.BRIGHT + "Uppercase letters?" + Style.RESET_ALL + " Y/N\n--> ")
+        if upper.lower() in ["o", "oui", "ou", "yes", "y"]:
+            upper = True
+            return upper
+        elif upper.lower() in ["n", "non", "no", ""]:
+            upper = False
+            return upper
         else:
-            print("Vous devez répondre soit oui, soit non.")
-            maj = -1
+            print("You need to answer Yes or No.")
+            upper = -1
 
-def def_min(min=-1):
-    while type(min) != bool:
-        min = input(Style.BRIGHT + "Minuscules ?" + Style.RESET_ALL + " O/N\n--> ")
-        if min.lower() in ["o", "oui", "ou", "yes", "y"]:
-            min = True
-            return min
-        elif min.lower() in ["n", "non", "no", ""]:
-            min = False
-            return min
+def def_lower(lower=-1):
+    while type(lower) != bool:
+        lower = input(Style.BRIGHT + "Lowercase letters?" + Style.RESET_ALL + " Y/N\n--> ")
+        if lower.lower() in ["o", "oui", "ou", "yes", "y"]:
+            lower = True
+            return lower
+        elif lower.lower() in ["n", "non", "no", ""]:
+            lower = False
+            return lower
         else:
-            print("Vous devez répondre soit oui, soit non.")
-            min = -1
+            print("You need to answer Yes or No.")
+            lower = -1
 
-def def_car_spe(car_spe=-1):
-    while type(car_spe) != bool:
-        car_spe = input(Style.BRIGHT + "Caractères spéciaux ?" + Style.RESET_ALL + " O/N\n--> ")
-        if car_spe.lower() in ["o", "oui", "ou", "yes", "y"]:
-            car_spe = True
-            return car_spe
-        elif car_spe.lower() in ["n", "non", "no", ""]:
-            car_spe = False
-            return car_spe
+def def_spe_char(spe_char=-1):
+    while type(spe_char) != bool:
+        spe_char = input(Style.BRIGHT + "Special characters?" + Style.RESET_ALL + " Y/N\n--> ")
+        if spe_char.lower() in ["o", "oui", "ou", "yes", "y"]:
+            spe_char = True
+            return spe_char
+        elif spe_char.lower() in ["n", "non", "no", ""]:
+            spe_char = False
+            return spe_char
         else:
-            print("Vous devez répondre soit oui, soit non.")
-            car_spe = -1
+            print("You need to answer Yes or No.")
+            spe_char = -1
 
 def def_nb(nb=-1):
     while type(nb) != bool:
-        nb = input(Style.BRIGHT + "Nombres ?" + Style.RESET_ALL + " O/N\n--> ")
+        nb = input(Style.BRIGHT + "Numbers?" + Style.RESET_ALL + " Y/N\n--> ")
         if nb.lower() in ["o", "oui", "ou", "yes", "y"]:
             nb = True
             return nb
@@ -76,45 +76,45 @@ def def_nb(nb=-1):
             nb = False
             return nb
         else:
-            print("Vous devez répondre soit oui, soit non.")
+            print("You need to answer Yes or No.")
             nb = -1
 
-taille = def_taille()
-maj = def_maj()
-min = def_min()
-car_spe = def_car_spe()
+length = def_length()
+upper = def_upper()
+lower = def_lower()
+spe_char = def_spe_char()
 nb = def_nb()
 
-# Tant que l'un des 4 critères n'est pas choisi
-while maj == False and min == False and car_spe == False and nb == False:
-    choix = -1
-    while type(choix) != int or choix not in [1, 2, 3, 4]:
-        choix = int(input("Vous devez " + Style.BRIGHT + "choisir" + Style.RESET_ALL + " au moins l'un des 4 critères suivants (1, 2 ou 3):" + Style.BRIGHT + "\n1. Majuscules\n2. Minuscules\n3. Caractères spéciaux\n4. Nombres" + Style.RESET_ALL + "\n--> "))
-    if choix == 1:
-        maj = def_maj()
-    elif choix == 2:
-        min = def_min()
-    elif choix == 3:
-        car_spe = def_car_spe()
-    elif choix == 4:
+# while 1 of the 4 attributes is not chosen
+while not upper and not lower and not spe_char and not nb:
+    choice = -1
+    while type(choice) != int or choice not in [1, 2, 3, 4]:
+        choice = int(input("You need to " + Style.BRIGHT + "choose" + Style.RESET_ALL + " at least 1 of the 4 attributes (1, 2, 3 or 4):" + Style.BRIGHT + "\n1. Uppercase letters\n2. Lowercase letters\n3. Special characters\n4. Numbers" + Style.RESET_ALL + "\n--> "))
+    if choice == 1:
+        upper = def_upper()
+    elif choice == 2:
+        lower = def_lower()
+    elif choice == 3:
+        spe_char = def_spe_char()
+    elif choice == 4:
         nb = def_nb()
 
-# Ajout, dans une grande chaîne de caractères, des éléments appartenant aux critères choisi
+# Adding elements that meet the selected criteria to a large string
 final = ""
-if maj:
+if upper:
     final += string.ascii_uppercase
-if min:
+if lower:
     final += string.ascii_lowercase
-if car_spe:
+if spe_char:
     final += string.punctuation
 if nb:
     final += string.digits
 
-# Création du mot de passe
-while len(mot_de_passe) != taille:
-    mot_de_passe += secrets.choice(final) # Ajout d'un caractère dans le mot de passe
+# Password creation
+while len(password) != length:
+    password += secrets.choice(final) # Adding a character in the password
 
-print(mot_de_passe)
+print(password)
 
-pyperclip.copy(mot_de_passe)
-print("Mot de passe copié !")
+pyperclip.copy(password)
+print("Password copied!")
